@@ -1,9 +1,13 @@
+import os
 from contacts import add_birthday, add_contact, birthdays, change_contact, show_birthday, show_phone, show_all
-from adress_book import AddressBook  
+from seralization import load_data, save_data  
 
-    
+current_dir = os.path.dirname(os.path.abspath(__file__))  
+file_path = os.path.join(current_dir, "addressbook.pkl") 
+
+
 def main():
-    book = AddressBook()
+    book = load_data(file_path)
     print("Welcome to the assistant bot!")
     while True:
         command = input("Enter a command: ").lower().strip()
@@ -33,6 +37,12 @@ def main():
                 print(birthdays(args, book))
             case _:
                 print("Invalid command.")
+    save_data(book, file_path)
+
+
+
+
+
 
 if __name__ == "__main__":
     main()
